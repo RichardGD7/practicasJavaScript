@@ -1,4 +1,4 @@
-num1 = 9
+num1 = 1
 num2 = 5
 
 /* Funcion para Suma de Dos numeros*/
