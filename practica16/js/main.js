@@ -1,23 +1,5 @@
-let users = [
-    {
-        name: "jorge",
-        email: "jorge@gmail.com",
-        photo: "https://randomuser.me/api/portraits/men/92.jpg",
-        id: 123,
-    },
-    {
-        name: "jorge",
-        email: "jorge@gmail.com",
-        photo: "https://randomuser.me/api/portraits/men/92.jpg",
-        id: 123,
-    },
-    {
-        name: "jorge",
-        email: "jorge@gmail.com",
-        photo: "https://randomuser.me/api/portraits/men/92.jpg",
-        id: 123,
-    }
-];
+let users = [];
+
 
 let inputName = document.getElementById("nombre_input");
 let inputEmail = document.getElementById("exampleInputEmail1");
@@ -25,50 +7,26 @@ let inputPhoto = document.getElementById("foto_input");
 let chageButtom = document.getElementById("changeButtom");
 let usersCard = document.getElementById("usersCard")
 let form = document.getElementById("form1")
-//let pruebah1 = document.getElementById("prueba")
-
-// inputName.addEventListener("keyup", (event) => {
-//     let name_value = event.target.value;
-//     inputName = name_value;
-//     console.log(name_value)
-// })
-
-// inputEmail.addEventListener("keyup", (event) => {
-//     let email_value = event.target.value;
-//     inputEmail = email_value;
-//     console.log(email_value)
-// })
-
-// inputPhoto.addEventListener("keyup", (event) => {
-//     let input_value = event.target.value;
-//     inputPhoto = input_value;
-//     console.log(input_value)
-// })
-
-// chageButtom.addEventListener("click", (event) => {
-//    pruebah1.innerText = inputEmail, inputName, inputPhoto;
-//    users.push({inputName,inputEmail,inputPhoto})
-// })
 
 form.addEventListener("submit", (event) => {
     // Evita que el formulario se envíe por defecto
     event.preventDefault();
     
     // Accede a los valores del formulario
-    const nombre = inputName.value;
+    const name = inputName.value;
     const email = inputEmail.value;
     const photo = inputPhoto.value;
     const id = Date.now()
     
-    users.push({nombre,email,photo,id})
+    users.push({name,email,photo,id})
     printCard(users);
     form.reset();
     // Por ejemplo, puedes mostrar los valores en una alerta:
     //alert(`Nombre: ${nombre}\nCorreo Electrónico: ${email}`);
-  });
+});
 
+const cardCration = (users,id) => {
 
-const cardCration = (users) => {
     let divCard = document.createElement("div");
     divCard.classList.add("card","col","mb-4");
 
@@ -88,9 +46,10 @@ const cardCration = (users) => {
     cardEmail.innerText = users.email;
 
     let deleteButtom = document.createElement("button");
-    deleteButtom.setAttribute("type","reset");
+    deleteButtom.setAttribute("type","buttom");
     deleteButtom.classList.add("btn","btn-primary");
     deleteButtom.innerText = "Borrar"
+    deleteButtom.setAttribute("id",id);
 
     /*Append*/
     divCardBody.append(h5Name,cardEmail);
@@ -102,8 +61,18 @@ const cardCration = (users) => {
 
 const printCard = (users) => {
     usersCard.innerHTML = "";
-    users.forEach(card => {
-        cardCration(card)
+    users.forEach((card,index,array) => {
+        
+        cardCration(card,card.id)
+
+        let idButtom = document.getElementById(card.id)
+
+        idButtom.addEventListener("click", () => {
+            array.splice(index,1)
+            printCard(array)
+            console.log(card.id)
+        })
+        
     });
 }
 
