@@ -87,9 +87,14 @@ const cardCration = (users) => {
     cardEmail.classList.add("card-text");
     cardEmail.innerText = users.email;
 
+    let deleteButtom = document.createElement("button");
+    deleteButtom.setAttribute("type","reset");
+    deleteButtom.classList.add("btn","btn-primary");
+    deleteButtom.innerText = "Borrar"
+
     /*Append*/
     divCardBody.append(h5Name,cardEmail);
-    divCard.append(img,divCardBody);
+    divCard.append(img,divCardBody,deleteButtom);
 
     usersCard.append(divCard);
     return usersCard;

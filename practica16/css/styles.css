@@ -2,8 +2,11 @@ div {
     margin-left: 5px;
     margin-right: 5px;
 }
+#bothColumns{
+    justify-content: center;
+}
 #columna {
-    max-width: 50%;
+    max-width: 60%;
 }
 
 #usersCard {
